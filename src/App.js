@@ -26,12 +26,12 @@ function App() {
             method: 'GET',
             headers: {
                 'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com',
-                'X-RapidAPI-Key': process.env.REACT_APP_KEY
+                'X-RapidAPI-Key': '7cb7c78938msh0ac0a24c3ccd7e9p122e80jsn6f4afd6ee3d7'
             }
         };
         console.log(process.env.REACT_APP_KEY);
 
-        fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options)  //https://online-movie-database.p.rapidapi.com/auto-complete?q=
+        fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options) 
             .then(response => response.json())
             .then(data => {
                 setMovies(data.d);

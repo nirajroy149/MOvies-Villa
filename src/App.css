@@ -11,9 +11,7 @@ body{
   background-color: rgb(242 239 239 / 48%);
   text-align: center;
 }
-/* .heading{
-  color: white;
-} */
+
 .container{
   margin: auto;
   margin-top: 30px;
@@ -78,8 +76,6 @@ body{
   font-size: 17px;
   padding: 10px;
   border: 0px;
-
-
 }
 .search input:focus{
   outline: none;
@@ -95,8 +91,53 @@ body{
   width: 22px
 }
 
- @media (max-width: 530px){
+ @media (min-width:500px) and (max-width: 530px){
    .content{
      margin: 12px;
    }
  }
+ @media (max-width: 500px){
+   .content{
+     margin: 8px;
+   }
+}
+ @media (max-width: 472px){
+  .content{
+    width: 169px;
+    height: 297px;
+    margin: 5;
+    padding: 15px;
+  }
+  .content .title-1{
+    font-size: 9px;
+  }
+  .search{
+    width: 250px;
+  }
+  .search input{
+    font-size: 15px;
+    padding: 10px;
+  }
+  .search img{
+    width: 15px;
+  }
+}
+ @media (max-width: 377px){
+  .content{
+    width: 132px;
+    height: 229px;
+    margin: 5px;
+  }
+  .content .title-2{
+    font-weight: bold;
+    font-size: 10px;
+  }
+}
+ @media (max-width: 300px){
+  .content{
+    width: 127px;
+    height: 235px;
+  }
+  
+}
+

@@ -9,6 +9,7 @@ function App() {
     const [loading, setLoading] = useState(true);
     const [title, setTitle] = useState("Game")
     const [movieName, setMovieName] = useState("");
+    const [err, seterr] = useState(false);
 
     function handleChange(e){
         const name = e.target.value;
@@ -21,25 +22,28 @@ function App() {
     }
 
     const searchMovies = async (title) => {
+        
 
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com',
-                'X-RapidAPI-Key': '7cb7c78938msh0ac0a24c3ccd7e9p122e80jsn6f4afd6ee3d7'
-            }
-        };
-
-        fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options) 
-            .then(response => response.json())
-            .then(data => {
-                setMovies(data.d);
-                setLoading(false);
-            })
-            .catch(err => console.error(err));
+        try {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com',
+                    'X-RapidAPI-Key': '7cb7c78938msh0ac0a24c3ccd7e9p122e80jsn6f4afd6ee3d7'
+                }
+            };
+            const response = await fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options) 
+            const data = await response.json();
+            setMovies(data.d);
+            setLoading(false);
+        } catch (error) {
+            seterr(true);
+        }
     }
+
+        
     useEffect(() => {
-        searchMovies(title)
+        searchMovies(title);
     }, []);
 
     if (loading) return <h1 className="heading">Loading...</h1>
@@ -62,8 +66,8 @@ function App() {
         </div>
 
         <div className="container">
-            {movies.map((item) => {
-                return <Card type={title} key={item.id} title={item.l} imageUrl={item.i.imageUrl} />
+            {movies.map((movie) => {
+                return <Card key={movie.id} movie={movie} />
             })}
         </div>
     </>

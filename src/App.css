@@ -11,7 +11,9 @@ body{
   background-color: rgb(242 239 239 / 48%);
   text-align: center;
 }
-
+.loading{
+  margin: 50px 0;
+}
 .container{
   margin: auto;
   margin-top: 30px;
@@ -24,7 +26,7 @@ body{
 }
 .content{
   width: 220px;
-  height: 360px;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -62,16 +64,22 @@ body{
 
 .search{
   background-color: white;
-  width: 300px;
+  padding: 4px 10px;
+  max-width: 350px;
   margin: auto;
   margin-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-radius: 20px;
   transition: all 0.2s;
+  /* overflow: hidden; */
   
 }
+.search:hover{
+  transform: scale(1.05, 1.05);
+}
+
 .search input{
   font-size: 17px;
   padding: 10px;
@@ -80,15 +88,9 @@ body{
 .search input:focus{
   outline: none;
 }
-.search:hover{
-  transform: scale(1.05, 1.05);
-}
 .search img{
-  width: 20px;
-  transition: all 0.2s;
-}
-.search img:hover{
-  width: 22px
+  margin-right: 10px;
+  max-width: 25px;
 }
 
  @media (min-width:500px) and (max-width: 530px){
@@ -111,16 +113,7 @@ body{
   .content .title-1{
     font-size: 9px;
   }
-  .search{
-    width: 250px;
-  }
-  .search input{
-    font-size: 15px;
-    padding: 10px;
-  }
-  .search img{
-    width: 15px;
-  }
+ 
 }
  @media (max-width: 377px){
   .content{
@@ -131,6 +124,9 @@ body{
   .content .title-2{
     font-weight: bold;
     font-size: 10px;
+  }
+  .search{
+    min-width: 150px;
   }
 }
  @media (max-width: 300px){

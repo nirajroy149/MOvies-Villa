@@ -6,23 +6,21 @@ import searchicon from "./images/search.png"
 function App() {
 
     const [movies, setMovies] = useState([]);
+    const [startloading, setstartLoading] = useState(true);
     const [loading, setLoading] = useState(true);
-    const [title, setTitle] = useState("Game")
     const [movieName, setMovieName] = useState("");
-    const [err, seterr] = useState(false);
 
-    function handleChange(e){
+    function handleChange(e) {
         const name = e.target.value;
         setMovieName(name);
     }
 
-    function handleClick(){
+    function handleClick() {
         setLoading(true)
         searchMovies(movieName);
     }
 
     const searchMovies = async (title) => {
-        
 
         try {
             const options = {
@@ -32,21 +30,28 @@ function App() {
                     'X-RapidAPI-Key': '7cb7c78938msh0ac0a24c3ccd7e9p122e80jsn6f4afd6ee3d7'
                 }
             };
-            const response = await fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options) 
+            const response = await fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options)
             const data = await response.json();
             setMovies(data.d);
             setLoading(false);
         } catch (error) {
-            seterr(true);
+                console.log(error);
+                
         }
+        setLoading(false)
     }
 
-        
+
     useEffect(() => {
-        searchMovies(title);
+        const title = ["Game", "Avengers", "Netflix", "Horror", "Harry Porter"];
+        const x = Math.floor(Math.random() * 5);
+        searchMovies(title[x]);
+        setTimeout(()=>{
+            setstartLoading(false);
+        },2000)
     }, []);
 
-    if (loading) return <h1 className="heading">Loading...</h1>
+    if(startloading) return <h2>Loading...</h2>
 
     return <>
         <h1 className="heading">MOvies Villa</h1>
@@ -59,17 +64,18 @@ function App() {
                 placeholder="Search for movies"
             />
             <img
-            onClick = {handleClick}
+                onClick={handleClick}
                 src={searchicon}
                 alt="notfound"
             />
         </div>
 
-        <div className="container">
-            {movies.map((movie) => {
+        {loading ? <h3 className="loading">Loading Movies...</h3> : <div className="container">
+            {movies ? movies.map((movie) => {
                 return <Card key={movie.id} movie={movie} />
-            })}
-        </div>
+            }) : <h3>Movie Not Found</h3>}
+        </div>}
+
     </>
 }
 export default App;

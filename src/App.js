@@ -18,6 +18,18 @@ function App() {
     function handleClick() {
         setLoading(true)
         searchMovies(movieName);
+
+    }
+
+    function handleEnter(e) {
+        if (movieName != "") {
+            if (e.key === "Enter") {
+                setLoading(true)
+                searchMovies(movieName);
+                e.preventDefault();
+
+            }
+        }
     }
 
     const searchMovies = async (title) => {
@@ -33,25 +45,25 @@ function App() {
             const response = await fetch(`https://online-movie-database.p.rapidapi.com/auto-complete?q=${title}`, options)
             const data = await response.json();
             setMovies(data.d);
-            setLoading(false);
         } catch (error) {
                 console.log(error);
-                
+
         }
         setLoading(false)
     }
 
 
+
     useEffect(() => {
-        const title = ["Game", "Avengers", "Netflix", "Horror", "Harry Porter"];
-        const x = Math.floor(Math.random() * 5);
+        const title = ["Game", "Avengers", "Netflix", "Horror"];
+        const x = Math.floor(Math.random() * 4);
         searchMovies(title[x]);
-        setTimeout(()=>{
+        setTimeout(() => {
             setstartLoading(false);
-        },2000)
+        }, 2000)
     }, []);
 
-    if(startloading) return <h2>Loading...</h2>
+    if (startloading) return <h2>Loading...</h2>
 
     return <>
         <h1 className="heading">MOvies Villa</h1>
@@ -59,6 +71,7 @@ function App() {
         <div className="search">
             <input
                 onChange={handleChange}
+                onKeyPress={handleEnter}
                 value={movieName}
                 type="text"
                 placeholder="Search for movies"

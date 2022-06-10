@@ -142,10 +142,10 @@ body{
   }
 
  }
- @media (max-width:468px){
+ @media (max-width:450px){
 
   .content{
-    /* transform: scale(0.7, 0.7); */
+    width: 48%;
     margin: 0;
     margin-bottom: 20px;
   }
@@ -158,7 +158,6 @@ body{
 
  }
  @media (max-width: 377px){
-  
   .search{
     max-width: 70%;
   }
